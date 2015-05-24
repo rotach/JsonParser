@@ -29,6 +29,8 @@ public class JsonKeyValue {
         value = new JsonStringValue(s);
     }
 
+    public void setValue(JsonObjectValue ov) { value = ov; }
+
     private String key;
     private JsonValue value;
 
@@ -39,6 +41,8 @@ public class JsonKeyValue {
         } else if (value.getClass() == JsonBooleanValue.class) {
             s +=  "\"" + key + "\":" + value.getValueString();
         } else if (value.getClass() == JsonNumberValue.class) {
+            s +=  "\"" + key + "\":" + value.getValueString();
+        } else if (value.getClass() == JsonObjectValue.class) {
             s +=  "\"" + key + "\":" + value.getValueString();
         }
         return s;

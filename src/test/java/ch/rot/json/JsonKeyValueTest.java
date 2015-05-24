@@ -53,4 +53,22 @@ public class JsonKeyValueTest {
         kv.setValue(false);
         assertEquals("\"booleankey\":" + false, kv.getKeyValueString());
     }
+
+    @Test
+    public void objectValueTest() {
+        JsonObjectValue ov = new JsonObjectValue();
+        JsonKeyValue ikv1 = new JsonKeyValue();
+        ikv1.setKey("intkey1");
+        ikv1.setValue(100);
+        JsonKeyValue ikv2 = new JsonKeyValue();
+        ikv2.setKey("intkey2");
+        ikv2.setValue(200);
+        ov.addJsonKeyValue(ikv1);
+        ov.addJsonKeyValue(ikv2);
+
+        JsonKeyValue kv = new JsonKeyValue();
+        kv.setKey("objectkey");
+        kv.setValue(ov);
+        assertEquals("\"objectkey\":" + "{\"intkey1\":100,\"intkey2\":200}", kv.getKeyValueString());
+    }
 }

@@ -4,25 +4,31 @@ import java.util.ArrayList;
 
 public class JsonObjectValue extends JsonValue {
 
-    private ArrayList<JsonKeyValue> array;
+    private ArrayList<JsonKeyValue> keyValueArray;
+
+    public JsonObjectValue() {
+        keyValueArray = new ArrayList<JsonKeyValue>();
+    }
 
     public void addJsonKeyValue(JsonKeyValue kv) {
-        array.add(kv);
+        keyValueArray.add(kv);
     }
 
     public JsonKeyValue removeJsonKeyValue() {
-        return array.remove(array.size()-1);
+        return keyValueArray.remove(keyValueArray.size()-1);
     }
 
     public String getValueString() {
-        //TODO: string builder
-        String s = "{";
-        for (JsonKeyValue kv : array) {
-            s += kv.getKeyValueString() + ",";
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        for (JsonKeyValue kv : keyValueArray) {
+            sb.append(kv.getKeyValueString());
+            sb.append(",");
         }
         // trim off the final comma
-        s.substring(0,s.length()-1);
-        s += "}";
-        return s;
+        sb.deleteCharAt(sb.length()-1);
+        sb.append("}");
+
+        return sb.toString();
     }
 }
